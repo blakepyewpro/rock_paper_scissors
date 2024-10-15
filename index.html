@@ -2,25 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
 </head>
 <body>
     <div id="parent-container">
         <div id="header-area">
             <p>
-                <span id="ro">Ro-</span>
-                <span id="sham">Sham-</span>
-                <span id="bo">Bo</span>
+                <span id="ro">Ro-</span><span id="sham">Sham-</span><span id="bo">Bo</span>
             </p>
         </div>
         <div id="display-area">
-            <div id="scores"></div>
-            <div id="result"></div>
+            <div id="scores">
+                <p>
+                    <span class="score-label">Player: </span>
+                    <span class="score-amount" id="player-score">0</span>
+                </p>
+                <p>
+                    <span class="score-label">CPU: </span>
+                    <span class="score-amount" id="cpu-score">0</span>
+                </p>
+            </div>
+            <div id="result">
+                <div id="result-text">Waiting to Start...</div>
+                <div id="result-icons"></div>
+            </div>
         </div>
         <div id="control-area">
-            <div id="play-buttons"></div>
-            <div id="control-buttons"></div>
+            <div id="play-buttons">
+                <button class="play" id="rock">Rock</button>
+                <button class="play" id="paper">Paper</button>
+                <button class="play" id="scissors">Scissors</button>
+            </div>
+            <div id="control-buttons">
+                <button class="control">Start</button>
+            </div>
         </div>
     </div>
 </body>
