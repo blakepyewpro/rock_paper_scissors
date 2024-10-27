@@ -12,3 +12,124 @@
     --red: #FF5555;
     --yellow: #F1FA8C;
 }
+
+body {
+    background-color: var(--bg-color);
+    color: var(--fg-color);
+    font-family: Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    font-size: 2vw;
+}
+
+#parent-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#header-area {
+    flex-basis: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.score-label {
+    font-weight: bold;
+}
+
+#header-area span {
+    font-size: 5vw;
+}
+
+#ro {
+    font-family: 'Courier New', Courier, monospace;
+    color: var(--cyan);
+    font-weight: lighter;
+}
+
+#sham {
+    font-family: 'Times New Roman', Times, serif;
+    color: var(--green);
+    font-style: italic;
+}
+
+#bo {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: var(--yellow);
+    font-weight: bold;
+}
+
+#display-area {
+    flex-basis: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#result-icons {
+    display: flex;
+    align-items: center;
+}
+
+#result-icons img {
+    max-height: 50%;
+    width: 100px;
+    margin: 15px;
+}
+
+#control-area {
+    flex-basis: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#play-buttons, #control-buttons {
+    margin: 5px;
+}
+
+button {
+    background-color: var(--cl-color);
+    color: var(--fg-color);
+    border: 2px solid var(--fg-color);
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 1vw;
+}
+
+#play-buttons button {
+    width: 100px;
+    margin: 5px;
+}
+
+#control-buttons button {
+    width: 328px;
+}
+
+#rock:hover {
+    color: var(--cyan);
+    border-color: var(--cyan);
+}
+
+#paper:hover {
+    color: var(--green);
+    border-color: var(--green);
+}
+
+#scissors:hover {
+    color: var(--yellow);
+    border-color: var(--yellow);
+}
+
+.control:hover {
+    color: var(--red);
+    border-color: var(--red);
+}

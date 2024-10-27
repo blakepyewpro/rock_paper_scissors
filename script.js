@@ -1,7 +1,11 @@
 let playerScore = 0;
 let computerScore = 0;
 let roundsPlayed = 0;
-playGame();
+
+const playerScoreSpan = document.querySelector("#player-score");
+const cpuScoreSpan = document.querySelector("#cpu-score");
+const resultTextDiv = document.querySelector("#result-text");
+const resultIconsDiv = document.querySelector("#result-icons");
 
 function playGame() {
     while (roundsPlayed < 5) {
