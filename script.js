@@ -1,17 +1,47 @@
 let playerScore = 0;
 let computerScore = 0;
 let roundsPlayed = 0;
+let gameActive = false;
 
 const playerScoreSpan = document.querySelector("#player-score");
 const cpuScoreSpan = document.querySelector("#cpu-score");
 const resultTextDiv = document.querySelector("#result-text");
 const resultIconsDiv = document.querySelector("#result-icons");
 
-function playGame() {
-    while (roundsPlayed < 5) {
-        playRound();
+const controlBtn = document.querySelector(".control");
+const rockBtn = document.querySelector("#rock");
+const paperBtn = document.querySelector("#paper");
+const scissorsBtn = document.querySelector("#scissors");
+
+controlBtn.addEventListener("click", controlBtnPressed);
+rockBtn.addEventListener("click", () => playBtnPressed("rock"));
+paperBtn.addEventListener("click", () => playBtnPressed("paper"));
+scissorsBtn.addEventListener("click", () => playBtnPressed("scissors"));
+
+function controlBtnPressed() {
+    if (gameActive == false) {
+        gameActive = true;
+        controlBtn.textContent = "Cancel";
+        rockBtn.removeAttribute("disabled");
+        paperBtn.removeAttribute("disabled");
+        scissorsBtn.removeAttribute("disabled");
+    } else if (gameActive == true) {
+        gameActive = false;
+        controlBtn.textContent = "Start";
+        rockBtn.setAttribute("disabled", "");
+        paperBtn.setAttribute("disabled", "");
+        scissorsBtn.setAttribute("disabled", "");
     }
-    getGameWinner();
+}
+
+function playBtnPressed(choice) {
+    if (choice == "rock") {
+        alert("Rock");
+    } else if (choice == "paper") {
+        alert("Paper");
+    } else if (choice == "scissors") {
+        alert("Scissors");
+    }
 }
 
 function playRound(){

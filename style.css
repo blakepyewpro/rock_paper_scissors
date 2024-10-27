@@ -105,6 +105,7 @@ button {
     font-size: 1vw;
 }
 
+
 #play-buttons button {
     width: 100px;
     margin: 5px;
@@ -114,22 +115,27 @@ button {
     width: 328px;
 }
 
-#rock:hover {
+#rock:hover:enabled {
     color: var(--cyan);
     border-color: var(--cyan);
 }
 
-#paper:hover {
+#paper:hover:enabled {
     color: var(--green);
     border-color: var(--green);
 }
 
-#scissors:hover {
+#scissors:hover:enabled {
     color: var(--yellow);
     border-color: var(--yellow);
 }
 
-.control:hover {
+.control:hover:enabled {
     color: var(--red);
     border-color: var(--red);
+}
+
+button:disabled {
+    color: var(--com-color);
+    border-color: var(--com-color);
 }
