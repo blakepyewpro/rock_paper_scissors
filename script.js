@@ -22,7 +22,7 @@ const scissorsBtn = document.querySelector("#scissors");
 controlBtn.addEventListener("click", controlBtnPressed);
 rockBtn.addEventListener("click", () => playRound("rock", getCpuChoice()));
 paperBtn.addEventListener("click", () => {
-    playRound("paper", getCpuChoice);
+    playRound("paper", getCpuChoice());
 });
 scissorsBtn.addEventListener("click", () => {
     playRound("scissors", getCpuChoice());
@@ -34,10 +34,6 @@ function controlBtnPressed() {
     } else if (gameActive == true) {
         resetGame();
     }
-}
-
-function playBtnPressed(choice) {
-    scoreRound(choice, getcpuChoice());
 }
 
 function startGame() {
