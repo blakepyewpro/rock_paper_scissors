@@ -52,6 +52,7 @@ function resetGame() {
     cpuScore = 0;
     controlBtn.textContent = "Start";
     resultTextDiv.textContent = "Waiting to start..."
+    updateScores();
     rockBtn.setAttribute("disabled", "");
     paperBtn.setAttribute("disabled", "");
     scissorsBtn.setAttribute("disabled", "");
@@ -67,32 +68,72 @@ function getCpuChoice() {
 function playRound(playerChoice, cpuChoice) {
     updateImages(playerChoice, cpuChoice);
     roundsPlayed += 1;
+    let result;
 
     if (playerChoice == "rock") {
         if (cpuChoice == "rock") {
-            return "tie";
+            result = "tie";
         } else if (cpuChoice == "paper") {
-            return "cpu";
+            result = "lose";
+            cpuScore += 1;
         } else if (cpuChoice == "scissors") {
-            return "player";
+            result = "win";
+            playerScore += 1;
         }
     } else if (playerChoice == "paper") {
         if (cpuChoice == "rock") {
-            return "player";
+            result = "win";
+            playerScore += 1;
         } else if (cpuChoice == "paper") {
-            return "tie";
-        } else if (cpuChoice == 3) {
-            return "cpu";
+            result = "tie";
+        } else if (cpuChoice == "scissors") {
+            result = "lose";
+            cpuScore += 1;
         }
     } else if (playerChoice == "scissors") {
         if (cpuChoice == "rock") {
-            return "cpu";
+            result = "lose";
+            cpuScore += 1;
         } else if (cpuChoice == "paper") {
-            return "player";
+            result = "win";
+            playerScore += 1;
         } else if (cpuChoice == "scissors") {
-            return "tie";
+            result = "tie";
         }
     }
+
+    if (roundsPlayed < 5) {
+        updateScores();
+        updateResult(result);
+    } else {
+        updateScores();
+        scoreGame();
+    }
+}
+
+function scoreGame() {
+    gameActive = false;
+    roundsPlayed = 0;
+    controlBtn.textContent = "Start";
+    rockBtn.setAttribute("disabled", "");
+    paperBtn.setAttribute("disabled", "");
+    scissorsBtn.setAttribute("disabled", "");
+
+    if (playerScore > cpuScore) {
+        updateResult("You won the game!");
+    } else if (cpuScore > playerScore) {
+        updateResult("You lost the game...");
+    } else {
+        updateResult("The game was a tie.");
+    }
+
+    playerScore = 0;
+    cpuScore = 0;
+}
+
+function updateScores() {
+    playerScoreSpan.textContent = playerScore;
+    cpuScoreSpan.textContent = cpuScore;
 }
 
 function updateImages(playerChoice, cpuChoice) {
