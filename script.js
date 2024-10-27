@@ -1,12 +1,18 @@
 let playerScore = 0;
-let computerScore = 0;
+let cpuScore = 0;
 let roundsPlayed = 0;
 let gameActive = false;
+
+const rockImg = "assets/rock-drac.png";
+const paperImg = "assets/paper-drac.png";
+const scissorsImg = "assets/scissors-drac.png";
 
 const playerScoreSpan = document.querySelector("#player-score");
 const cpuScoreSpan = document.querySelector("#cpu-score");
 const resultTextDiv = document.querySelector("#result-text");
 const resultIconsDiv = document.querySelector("#result-icons");
+const playerImg = document.querySelector("#player-img");
+const cpuImg = document.querySelector("#cpu-img");
 
 const controlBtn = document.querySelector(".control");
 const rockBtn = document.querySelector("#rock");
@@ -14,125 +20,111 @@ const paperBtn = document.querySelector("#paper");
 const scissorsBtn = document.querySelector("#scissors");
 
 controlBtn.addEventListener("click", controlBtnPressed);
-rockBtn.addEventListener("click", () => playBtnPressed("rock"));
-paperBtn.addEventListener("click", () => playBtnPressed("paper"));
-scissorsBtn.addEventListener("click", () => playBtnPressed("scissors"));
+rockBtn.addEventListener("click", () => playRound("rock", getCpuChoice()));
+paperBtn.addEventListener("click", () => {
+    playRound("paper", getCpuChoice);
+});
+scissorsBtn.addEventListener("click", () => {
+    playRound("scissors", getCpuChoice());
+});
 
 function controlBtnPressed() {
     if (gameActive == false) {
-        gameActive = true;
-        controlBtn.textContent = "Cancel";
-        rockBtn.removeAttribute("disabled");
-        paperBtn.removeAttribute("disabled");
-        scissorsBtn.removeAttribute("disabled");
+        startGame();
     } else if (gameActive == true) {
-        gameActive = false;
-        controlBtn.textContent = "Start";
-        rockBtn.setAttribute("disabled", "");
-        paperBtn.setAttribute("disabled", "");
-        scissorsBtn.setAttribute("disabled", "");
+        resetGame();
     }
 }
 
 function playBtnPressed(choice) {
-    if (choice == "rock") {
-        alert("Rock");
-    } else if (choice == "paper") {
-        alert("Paper");
-    } else if (choice == "scissors") {
-        alert("Scissors");
-    }
+    scoreRound(choice, getcpuChoice());
 }
 
-function playRound(){
-    const computerChoice = getComputerChoice();
-    console.log("computer has chosen");
-    const playerChoice = getPlayerChoice();
-    console.log("player has chosen");
-    const result = getRoundWinner(playerChoice, computerChoice);
-    console.log("round winner determined");
-
-    scoreRound(result, playerChoice, computerChoice);
+function startGame() {
+    gameActive = true;
+    resultTextDiv.textContent = "Make your selection...";
+    controlBtn.textContent = "Cancel";
+    rockBtn.removeAttribute("disabled");
+    paperBtn.removeAttribute("disabled");
+    scissorsBtn.removeAttribute("disabled");
 }
 
-function getComputerChoice() {
+function resetGame() {
+    gameActive = false;
+    roundsPlayed = 0;
+    playerScore = 0;
+    cpuScore = 0;
+    controlBtn.textContent = "Start";
+    resultTextDiv.textContent = "Waiting to start..."
+    rockBtn.setAttribute("disabled", "");
+    paperBtn.setAttribute("disabled", "");
+    scissorsBtn.setAttribute("disabled", "");
+}
+
+function getCpuChoice() {
     const choice = Math.floor(Math.random() * 3);
     if (choice == 0) return "rock";
     else if (choice == 1) return "scissors";
     else if (choice == 2) return "paper";
 }
 
-function getPlayerChoice() {
-    let input = prompt(`Please enter "rock", "paper", or "scissors"`);
-    input = input.toLowerCase();
-    switch(input) {
-        case "rock":
-            console.log(`${input} selected`);
-            return input;
-        case "paper":
-            console.log(`${input} selected`);
-            return input;
-        case "scissors":
-            console.log(`${input} selected`);
-            return input;
-        default:
-            console.log(`${input} selected`);
-            getPlayerChoice();
-    }
-}
+function playRound(playerChoice, cpuChoice) {
+    updateImages(playerChoice, cpuChoice);
+    roundsPlayed += 1;
 
-function getRoundWinner(playerChoice, computerChoice) {
     if (playerChoice == "rock") {
-        if (computerChoice == "rock") {
+        if (cpuChoice == "rock") {
             return "tie";
-        } else if (computerChoice == "paper") {
-            return "computer";
-        } else if (computerChoice == "scissors") {
+        } else if (cpuChoice == "paper") {
+            return "cpu";
+        } else if (cpuChoice == "scissors") {
             return "player";
         }
     } else if (playerChoice == "paper") {
-        if (computerChoice == "rock") {
+        if (cpuChoice == "rock") {
             return "player";
-        } else if (computerChoice == "paper") {
+        } else if (cpuChoice == "paper") {
             return "tie";
-        } else if (computerChoice == 3) {
-            return "computer";
+        } else if (cpuChoice == 3) {
+            return "cpu";
         }
     } else if (playerChoice == "scissors") {
-        if (computerChoice == "rock") {
-            return "computer";
-        } else if (computerChoice == "paper") {
+        if (cpuChoice == "rock") {
+            return "cpu";
+        } else if (cpuChoice == "paper") {
             return "player";
-        } else if (computerChoice == "scissors") {
+        } else if (cpuChoice == "scissors") {
             return "tie";
         }
     }
 }
 
-function scoreRound (result, playerChoice, computerChoice) {
-    if (result == "player"){
-        console.log("player won a round");
-        playerScore +=1;
-        roundsPlayed +=1;
-        alert(`You won the round!\n${playerChoice} beats ${computerChoice}`);
-    } else if (result == "computer") {
-        console.log("computer won a round");
-        computerScore += 1;
-        roundsPlayed +=1;
-        alert(`You lost the round...\n${playerChoice} loses to ${computerChoice}`);
-    } else if (result == "tie") {
-        console.log("tied round")
-        roundsPlayed +=1;
-        alert(`That round was a tie.`);
+function updateImages(playerChoice, cpuChoice) {
+    if (playerChoice == "rock") {
+        playerImg.setAttribute("src", rockImg);
+    } else if (playerChoice == "paper") {
+        playerImg.setAttribute("src", paperImg);
+    } else if (playerChoice == "scissors") {
+        playerImg.setAttribute("src", scissorsImg);
+    }
+
+    if (cpuChoice == "rock") {
+        cpuImg.setAttribute("src", rockImg);
+    } else if (cpuChoice == "paper") {
+        cpuImg.setAttribute("src", paperImg);
+    } else if (cpuChoice == "scissors") {
+        cpuImg.setAttribute("src", scissorsImg)
     }
 }
 
-function getGameWinner() {
-    if (playerScore > computerScore) {
-        alert(`You won the game!\nYou: ${playerScore} Computer: ${computerScore}`);
-    } else if (playerScore < computerScore) {
-        alert(`You lost the game...\nYou: ${playerScore} Computer: ${computerScore}`);
+function updateResult(result) {
+    if (result == "tie") {
+        resultTextDiv.textContent = "That round was a tie."
+    } else if (result == "win") {
+        resultTextDiv.textContent = "You won that round!"
+    } else if (result == "lose") {
+        resultTextDiv.textContent = "You lost that round..."
     } else {
-        alert(`The game was a tie.\n You: ${playerScore} Computer: ${computerScore}`)
+        resultTextDiv.textContent = result;
     }
 }
