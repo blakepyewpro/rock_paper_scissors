@@ -39,6 +39,7 @@ function controlBtnPressed() {
 function startGame() {
     gameActive = true;
     resultTextDiv.textContent = "Make your selection...";
+    updateScores();
     controlBtn.textContent = "Cancel";
     rockBtn.removeAttribute("disabled");
     paperBtn.removeAttribute("disabled");
