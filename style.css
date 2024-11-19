@@ -20,12 +20,15 @@ body {
     display: flex;
     flex-direction: column;
     font-size: 2vw;
+    padding: 0px;
+    margin: 0px;
 }
 
 #parent-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    min-height: 100vh;
 }
 
 #header-area {
